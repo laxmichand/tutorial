@@ -1,40 +1,53 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+
 
 function Header() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light bg-warning">
+        <nav className="py-2 my-3 navbar navbar-expand-lg navbar-light  bg-warning text-white fw-semibold">
             <div className="container-fluid bg-warning">
-                <a className="navbar-brand" href="/">Tutorial Adda</a>
+                <a className="navbar-brand text-white fw-semibold" href="/">Tutorial Adda</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <div className="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/">Home</a>
+                            <NavLink className="nav-link active text-white fw-semibold" aria-current="page" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/">Link</a>
+                            <NavLink className="nav-link text-white fw-semibold" to="/dashboard">Dashboard</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link text-white fw-semibold" to="/register">Register</NavLink>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle text-white fw-semibold" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a className="dropdown-item" href="/">Action</a></li>
                                 <li><a className="dropdown-item" href="/">Another action</a></li>
-                                <li><hr className="dropdown-divider"/></li>
+                                <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="/">Something else here</a></li>
                             </ul>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" href="/" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
                     </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div className="dropstart">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 show  text-small dropdown-menu-lg-start" data-popper-placement="bottom-start">
+                            <li className="nav-item dropdown">
+                                <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle show"
+                                    data-bs-toggle="dropdown" aria-expanded="true">
+                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a className="dropdown-item" href="#">Profile</a></li>
+                                    <li><a className="dropdown-item" href="#">Change Password</a></li>
+                                    <li><a className="dropdown-item" href="#">Sign out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -7,14 +7,18 @@ import Header from './Header';
 import Footer from './Footer';
 import Dashboard from '../dashboard/Dashboard';
 import Login from '../login/Login';
+import Register from '../register/Register';
 
 function Main() {
     return (
         <div className='container'>
             <Header />
             <Routes>
+                 <Route path='/' element={<Login />}></Route>
                 <Route path='/login' element={<Login />}></Route>
-                <Route path='/dashbord' element={<Dashboard />}></Route>
+                <Route path='/dashboard' element={<Dashboard />}></Route>
+                <Route path='/register' element={<Register />}></Route>
+                
             </Routes>
             <Footer />
         </div>
