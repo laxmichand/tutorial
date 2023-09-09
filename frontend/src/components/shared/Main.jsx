@@ -14,7 +14,7 @@ function Main() {
         <div className='container'>
             <Header />
             <Routes>
-                <Route path='/' element={<Login />}></Route>
+                <Route path='/' element={<tutorials />}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/tutorials' element={<Dashboard />}></Route>
                 <Route path='/register' element={<Register data={{ title: 'Create New Tutorial', create: 'Create'}} />} ></Route>
