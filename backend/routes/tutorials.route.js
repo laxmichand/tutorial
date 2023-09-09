@@ -6,7 +6,7 @@ const tutCtrl = require('../controllers/tutorial.controller');
 router.get("/getall",tutCtrl.getAllTutorial);
 router.get('/:id',tutCtrl.getTutorialById);
 router.post('/add',tutCtrl.addTutorial);
-router.put('/:_id',tutCtrl.updateTutorial);
+router.put('/:id',tutCtrl.updateTutorial);
 router.delete('/:id',tutCtrl.deleteTutorial);
 
 module.exports = router;

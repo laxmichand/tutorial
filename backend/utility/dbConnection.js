@@ -12,7 +12,7 @@ class Database {
   constructor() {
     this._connect();
   }
-  _connect() {
+   _connect() {
     mongoose
       .connect(url, {
         useNewUrlParser: true,

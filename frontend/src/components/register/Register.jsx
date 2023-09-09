@@ -1,26 +1,27 @@
 import { useForm } from 'react-hook-form';
 import React, { useEffect, useState } from 'react';
-import { getCoursesById } from "../../services/shared/register.service";
+import { addNew, getCoursesById, update } from "../../services/shared/register.service";
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Register = (prop) => {
     const { id } = useParams();
-    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: ''});
+    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: Boolean });
     const navigate = useNavigate();
     const onSubmit = (data) => {
-        fetch('http://localhost:9900/tutorials/add', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
+        console.log(data);
+        data.published = Boolean(data.published);
+        if (!id) {
+            addNew(data)
             .then((json) => {
-                console.log(json);
                 navigate('/tutorials');
             });
-
+        }else{
+            update(data,id)
+            .then(()=>{
+                navigate('/tutorials');
+            })
+        }
+       
     }
     const navigateTutorial = () => {
         navigate('/tutorials');
@@ -33,9 +34,9 @@ const Register = (prop) => {
                 if (id) {
                     reset(
                         {
-                            title: res.tutorials[0].title,
-                            description: res.tutorials[0].description,
-                            published: Boolean(res.tutorials[0].published)
+                            title: res.title,
+                            description: res.description,
+                            published: Boolean(res.published)
                         }
                     );
                 }

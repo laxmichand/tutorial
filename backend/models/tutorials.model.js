@@ -1,31 +1,24 @@
 const mongoose = require('mongoose');
 
-// tutorial schema
+// Tutorial schema
 var tutorialSchema = mongoose.Schema({
     id: {
         type: String,
-        index: true,
         unique: true
     },
     title: {
         type: String,
-        required: [true, "Title reuired"],
-        unique: true
+        required: [true, "Title reuired"]
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     published: {
         type: Boolean,
         required: [true, "flag required"],
     },
-    deleted: {
-        type: Boolean,
-        required: [true, "flag required"]
-    },
     createdAt: Date,
-    updatedAt: Date,
+    updatedAt: Date
 },
     { versionKey: false }
 );

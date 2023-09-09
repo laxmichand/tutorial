@@ -12,7 +12,7 @@ async function getTutorial() {
 // Get All Tutorial
 exports.getAllTutorial = async (req, res) => {
     try {
-        const allTutorial = await TutorialM.find({ deleted: false }).sort({ _id: -1 });
+        const allTutorial = await TutorialM.find().sort({ _id: -1 });
 
         res.status(200).json(allTutorial);
     } catch (error) {
@@ -52,12 +52,12 @@ exports.addTutorial = async (req, res) => {
 // Update a Book
 exports.updateTutorial = async (req, res) => {
 
-    const { _id } = req.params
+    const { id } = req.params
     const tutorial = req.body
     try {
-        if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No tutorial with that id')
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No tutorial with that id')
 
-        const updatedTutorial = await TutorialM.findByIdAndUpdate(_id, { ...tutorial, _id }, { new: true })
+        const updatedTutorial = await TutorialM.findByIdAndUpdate(id, { ...tutorial, id }, { new: true })
 
         res.status(201).json(updatedTutorial)
     } catch (error) {

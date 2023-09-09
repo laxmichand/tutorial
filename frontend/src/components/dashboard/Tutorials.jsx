@@ -10,7 +10,7 @@ function Tutorials() {
 
   useEffect(() => {
     getCourses().then((res) => {
-      setData(res.tutorials);
+      setData(res);
     })
   }, []);
 
@@ -18,7 +18,7 @@ function Tutorials() {
     deleteCoursesById(id).then((res) => {
       alert('item deleted');
       getCourses().then((res) => {
-        setData(res.tutorials);
+        setData(res);
       })
     })
   };
@@ -45,16 +45,16 @@ function Tutorials() {
         <tbody>
           {data && data.map((item, index) => {
             return <tr key={index}>
-              <th>{item.id}</th>
+              <th>{index+1}</th>
               <td>{item.title}</td>
               <td>{item.description}</td>
               <td>{String(item.published)}</td>
               <td>
                 <div className="d-flex gap-2 justify-content-center" aria-label="...">
-                  <NavLink to={`/update/${item.id}`}>
+                  <NavLink to={`/update/${item._id}`}>
                     <img src={'https://cdn-icons-png.flaticon.com/512/8539/8539634.png'} className='cursor-pointer' height={20} width={20} alt='edit' />
                   </NavLink>
-                  <NavLink onClick={()=>{handleDelete(item.id)}}>
+                  <NavLink onClick={()=>{handleDelete(item._id)}}>
                     <img src={'https://cdn-icons-png.flaticon.com/512/1828/1828851.png'} className='cursor-pointer' height={20} width={20} alt='delete' />
                   </NavLink>
                 </div>
