@@ -5,15 +5,12 @@ const API_URL = "http://localhost:9900/tutorials";
 export const getCourses = async () => {
 
     const response = await axios.get(API_URL +  '/getall');
-    console.log(response)
 
     return response.data
 }
 
 export const getCoursesById = async (id) => {
-
-    const response = await axios.get(API_URL +  '/get/' + id)
-
+    const response = await axios.get(API_URL +  '/get' + id)
     return response.data
 }
 

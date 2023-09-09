@@ -1,8 +1,11 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import {useNavigate} from 'react-router-dom';
-const Register = () => {
-    const { handleSubmit, register, formState: { errors } } = useForm();
+import React, { useEffect, useState } from 'react';
+import { getCoursesById } from "../../services/shared/register.service";
+import { useNavigate, useParams } from 'react-router-dom';
+
+const Register = (prop) => {
+    const { id } = useParams();
+    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: ''});
     const navigate = useNavigate();
     const onSubmit = (data) => {
         fetch('http://localhost:9900/tutorials/add', {
@@ -13,15 +16,40 @@ const Register = () => {
             },
         })
             .then((response) => response.json())
-            .then((json) =>{console.log(json)
+            .then((json) => {
+                console.log(json);
                 navigate('/tutorials');
             });
 
     }
     const navigateTutorial = () => {
         navigate('/tutorials');
-      };
-    
+    };
+
+    useEffect(() => {
+        if (id) {
+            getCoursesById(id).then((res) => {
+                console.log(res);
+                if (id) {
+                    reset(
+                        {
+                            title: res.tutorials[0].title,
+                            description: res.tutorials[0].description,
+                            published: Boolean(res.tutorials[0].published)
+                        }
+                    );
+                }
+            })
+        } else {
+            console.log('else');
+            reset({
+                title: '',
+                description: '',
+                published: ''
+            })
+        }
+
+    }, [])
 
     return (
         <section>
@@ -33,7 +61,7 @@ const Register = () => {
                                 <div className="row justify-content-center">
                                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-2 bg-info-subtle rounded">
 
-                                        <p className="text-center h3 fw-semibold mb-4 mx-1 mx-md-3 mt-3">Create New Tutorial</p>
+                                        <p className="text-center h3 fw-semibold mb-4 mx-1 mx-md-3 mt-3">{prop.data.title}</p>
 
                                         <form className="mx-1 mx-md-2" onSubmit={handleSubmit(onSubmit)}>
 
@@ -62,20 +90,20 @@ const Register = () => {
                                                     <br />
                                                     <div className="form-check form-check-inline">
                                                         <input className="form-check-input" type="checkbox"
-                                                            name="inlineRadioOptionsY" id="inlineRadio1" value="true" {...register('published', { required: false })} />
+                                                            name="inlineRadioOptionsY" id="inlineRadio1" value={true} {...register('published', { required: false })} />
                                                         <label className="form-check-label" htmlFor="inlineRadio1">Yes</label><br />
                                                         {errors.published && <span>published is required!</span>}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="d-flex gap-2 justify-content-end mx-3 mb-1 mt-4 mb-lg-3 text-danger  ">
-                                                <button type="submit" className="btn btn-success btn-sm text-white fw-semibold">Create</button>
+                                                <button type="submit" className="btn btn-success btn-sm text-white fw-semibold">{prop.data.create}</button>
                                                 <button type="button" className="btn btn-danger btn-sm text-white fw-semibold" onClick={navigateTutorial}>Cancel</button>
                                             </div>
                                         </form>
                                     </div>
                                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-1">
-                                        <img src={'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp'}
+                                        <img src={'https://img.freepik.com/free-vector/learning-concept-illustration_114360-6186.jpg?w=400'}
                                             className="img-fluid" alt='imagehere' />
                                     </div>
                                 </div>
