@@ -1,18 +1,17 @@
 import { useForm } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { addNew, getCoursesById, update } from "../../services/shared/register.service";
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Register = (prop) => {
     const { id } = useParams();
-    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: Boolean });
+    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: Boolean, id: '' });
     const navigate = useNavigate();
     const onSubmit = (data) => {
-        console.log(data);
         data.published = Boolean(data.published);
         if (!id) {
             addNew(data)
-            .then((json) => {
+            .then(() => {
                 navigate('/tutorials');
             });
         }else{
@@ -30,23 +29,23 @@ const Register = (prop) => {
     useEffect(() => {
         if (id) {
             getCoursesById(id).then((res) => {
-                console.log(res);
                 if (id) {
                     reset(
                         {
                             title: res.title,
                             description: res.description,
-                            published: Boolean(res.published)
+                            published: Boolean(res.published),
+                            id: res._id
                         }
                     );
                 }
             })
         } else {
-            console.log('else');
             reset({
                 title: '',
                 description: '',
-                published: ''
+                published: false,
+                id:''
             })
         }
 
