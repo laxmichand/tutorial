@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 
-const Login = (prop) => {
-  const [form, setForm] = useState({
-    username: '',
-    password: ''
-  });
+function SignUp(prop) {
 
-  const printValues = (evt) => {
-    evt.preventDefault(); // preventing default implementation of a form - submiting to the action
-    console.log(form.username + ' ' + form.password);
-  }
-  const updateField = (evt) => {
-    setForm({
-      ...form,
-      [evt.target.name]: evt.target.value
-    })
-  }
+    const [form, setForm] = useState({
+        username: '',
+        password: ''
+      });
+    
+      const printValues = (evt) => {
+        evt.preventDefault(); // preventing default implementation of a form - submiting to the action
+        console.log(form.username + ' ' + form.password);
+      }
+      const updateField = (evt) => {
+        setForm({
+          ...form,
+          [evt.target.name]: evt.target.value
+        })
+      }
 
   return (
     <section>
@@ -64,7 +65,7 @@ const Login = (prop) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Login;
+export default SignUp

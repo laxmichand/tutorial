@@ -17,7 +17,7 @@ const dbconn = require('./backend/utility/dbConnection');
 console.log("env running =>", endpoint);
 
 app.use(express.static(path.join(__dirname, "/frontend/build")));
-app.get(['/','/tutorials'], (req, res) => {
+app.get(['*'], (req, res) => {
   res.sendFile("index.html", { root: __dirname + "/frontend/build" });
 });
 

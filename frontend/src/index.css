@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to bottom,teal,white);
 }
 
 code {
@@ -19,15 +20,17 @@ code {
   transform: translate(0px, 34px);
 }
 
-.invalid{
+.invalid {
   display: block;
   width: 100%;
   margin-top: 0.25rem;
   font-size: .875em;
   color: #dc3545;
 }
-.cursor-pointer{
-  cursor: pointer;;
+
+.cursor-pointer {
+  cursor: pointer;
+  ;
 }
 
 .bdr {
