@@ -14,7 +14,6 @@ class Database {
     this.url = getDatabaseUrl();
     this._connect();
   }
-
   async _connect() {
     try {
       console.log('db url',this.url);
