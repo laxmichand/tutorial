@@ -1,26 +1,26 @@
 import { useForm } from 'react-hook-form';
 import React, { useEffect } from 'react';
-import { addNew, getCoursesById, update } from "../../services/shared/register.service";
+import { addNew, getTutorialsById, update } from "../../services/shared/register.service";
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Register = (prop) => {
     const { id } = useParams();
-    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: Boolean, id: '' });
+    const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: Boolean });
     const navigate = useNavigate();
     const onSubmit = (data) => {
         data.published = Boolean(data.published);
         if (!id) {
             addNew(data)
-            .then(() => {
-                navigate('/tutorials');
-            });
-        }else{
-            update(data,id)
-            .then(()=>{
-                navigate('/tutorials');
-            })
+                .then(() => {
+                    navigate('/tutorials');
+                });
+        } else {
+            update(data, id)
+                .then(() => {
+                    navigate('/tutorials');
+                })
         }
-       
+
     }
     const navigateTutorial = () => {
         navigate('/tutorials');
@@ -28,14 +28,13 @@ const Register = (prop) => {
 
     useEffect(() => {
         if (id) {
-            getCoursesById(id).then((res) => {
+            getTutorialsById(id).then((res) => {
                 if (id) {
                     reset(
                         {
                             title: res.title,
                             description: res.description,
                             published: Boolean(res.published),
-                            id: res._id
                         }
                     );
                 }
@@ -45,11 +44,10 @@ const Register = (prop) => {
                 title: '',
                 description: '',
                 published: false,
-                id:''
             })
         }
 
-    }, [])
+    }, [id, reset])
 
     return (
         <section>

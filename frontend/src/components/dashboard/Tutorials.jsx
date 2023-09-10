@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCourses, deleteCoursesById } from "../../services/shared/register.service";
+import { getCourses, deleteTutorialsById } from "../../services/shared/register.service";
 import { NavLink, useNavigate } from 'react-router-dom';
 
 
@@ -14,7 +14,7 @@ function Tutorials() {
   }, []);
 
   const handleDelete = (id) => {
-    deleteCoursesById(id).then((res) => {
+    deleteTutorialsById(id).then((res) => {
       getCourses().then((res) => {
         setData(res);
       })
@@ -46,7 +46,7 @@ function Tutorials() {
               <th>{index + 1}</th>
               <td>{item.title}</td>
               <td>{item.description}</td>
-              <td>{String(item.published) == 'true' ? 'YES' : 'NO'}</td>
+              <td>{String(item.published) === 'true' ? 'YES' : 'NO'}</td>
               <td>
                 <div className="d-flex gap-2 justify-content-center" aria-label="...">
                   <NavLink to={`/update/${item._id}`}>

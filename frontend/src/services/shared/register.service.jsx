@@ -9,13 +9,13 @@ export const getCourses = async () => {
     return response.data
 }
 
-export const getCoursesById = async (id) => {
+export const getTutorialsById = async (id) => {
     const response = await axios.get(API_URL +  '/' + id)
     return response.data
 }
 
 
-export const deleteCoursesById = async (id) => {
+export const deleteTutorialsById = async (id) => {
 
     const response = await axios.delete(API_URL + '/' + id)
 
