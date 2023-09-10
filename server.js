@@ -1,34 +1,31 @@
 const express = require("express");
-const path = require("path");
-const cors = require("cors");
-
-const winston = require('winston');
-const morgan = require('morgan');
-
-const { port, endpoint } = require("./backend/config/config");
-const dbConn = require("./backend/utility/dbConnection");
-const tutRouter = require("./backend/routes/tutorials.route");
+const path = require('path');
+var cors = require('cors');
 
 const app = express();
 
-// Middleware
-app.use(express.json({ limit: "30mb", extended: true }));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use((express.json({ limit: "30mb", extended: true})))
+app.use((express.urlencoded({ limit: "30mb", extended: true})))
+app.use((cors()));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "frontend/build")));
-
-// Routes
+const tutRouter = require('./backend/routes/tutorials.route');
 app.use("/tutorials", tutRouter);
 
-// Send the main HTML file for root and /tutorials routes
-app.get(["/", "/tutorials"], (req, res) => {
-  res.sendFile("index.html", { root: path.join(__dirname, "frontend/build") });
+const { port, endpoint } = require("./backend/config/config");
+const dbconn = require('./backend/utility/dbConnection');
+
+console.log("env running =>", endpoint);
+
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get(['/','/tutorials'], (req, res) => {
+  res.sendFile("index.html", { root: __dirname + "/frontend/build" });
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-  console.log("Environment: ", endpoint);
+
+app.listen(`${port}`, function () {
+  console.log(
+    "server deployed on http://%s:%s",
+    this.address().address,
+    this.address().port
+  );
 });
