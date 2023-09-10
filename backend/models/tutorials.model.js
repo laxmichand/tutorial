@@ -1,27 +1,27 @@
 const mongoose = require('mongoose');
 
 // Tutorial schema
-var tutorialSchema = mongoose.Schema({
-    id: {
-        type: String,
-        unique: true
-    },
+const tutorialSchema = mongoose.Schema({
     title: {
         type: String,
-        required: [true, "Title reuired"]
+        required: [true, "Title required"]
     },
     description: {
         type: String
     },
     published: {
         type: Boolean,
-        required: [true, "flag required"],
+        required: [true, "Flag required"],
     },
-    createdAt: Date,
-    updatedAt: Date
-},
-    { versionKey: false }
-);
+    createdAt: {
+        type: Date,
+        default: Date.now  // Set the default value to the current date and time
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now  // Set the default value to the current date and time
+    }
+}, { versionKey: false });
 
 // Model
-module.exports = mongoose.model('Tutorials', tutorialSchema);
+module.exports = mongoose.model('Tutorial', tutorialSchema);
