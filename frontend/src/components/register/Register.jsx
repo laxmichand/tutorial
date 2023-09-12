@@ -100,7 +100,7 @@ const Register = (prop) => {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-1">
+                                    <div className="col-md-10 col-lg-6 col-xl-7 d-flex justify-content-center align-items-center order-1 order-lg-1">
                                         <img src={'https://img.freepik.com/free-vector/learning-concept-illustration_114360-6186.jpg?w=400'}
                                             className="img-fluid" alt='imagehere' />
                                     </div>
