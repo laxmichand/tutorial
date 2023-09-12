@@ -16,7 +16,8 @@ function Header() {
                             <NavLink className="nav-link text-white fw-semibold" to="/tutorials">Tutorials</NavLink>
                         </li>
                     </ul>
-                    <div className="dropstart">
+                    {/* development pending checkout */}
+                    {/* <div className="dropstart">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 show  text-small dropdown-menu-lg-start" data-popper-placement="bottom-start">
                             <li className="nav-item dropdown">
                                 <NavLink to="/" className="d-block link-body-emphasis text-decoration-none dropdown-toggle show"
@@ -30,7 +31,7 @@ function Header() {
                                 </ul>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </nav>

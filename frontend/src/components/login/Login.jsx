@@ -53,7 +53,7 @@ const Login = (prop) => {
                       </div>
                     </form>
                   </div>
-                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-1">
+                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-center order-1 order-lg-1">
                     <img src={'https://colorlib.com/etc/regform/colorlib-regform-7/images/signin-image.jpg'} width={300}
                       className="img-fluid" alt='imagehere' />
                   </div>
