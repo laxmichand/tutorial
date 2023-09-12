@@ -7,7 +7,8 @@ const tutorialSchema = mongoose.Schema({
         required: [true, "Title required"]
     },
     description: {
-        type: String
+        type: String,
+        required: [true, "Description required"]
     },
     published: {
         type: Boolean,

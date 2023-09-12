@@ -10,6 +10,8 @@ function Tutorials() {
   useEffect(() => {
     getCourses().then((res) => {
       setData(res);
+    }).catch(err=>{
+      alert(err.response.data.message)
     })
   }, []);
 
@@ -17,6 +19,8 @@ function Tutorials() {
     deleteTutorialsById(id).then((res) => {
       getCourses().then((res) => {
         setData(res);
+      }).catch(err=>{
+        alert(err.response.data.message)
       })
     })
   };

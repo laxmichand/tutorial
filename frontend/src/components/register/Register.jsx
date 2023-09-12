@@ -11,14 +11,20 @@ const Register = (prop) => {
         data.published = Boolean(data.published);
         if (!id) {
             addNew(data)
-                .then(() => {
+                .then((res) => {
+                    console.log("dqd",res);
                     navigate('/tutorials');
-                });
+                }).catch(err=>{
+                  alert(err.response.data.message)
+                })
+
         } else {
             update(data, id)
                 .then(() => {
                     navigate('/tutorials');
-                })
+                }).catch(err=>{
+                    alert(err.response.data.message)
+                  })
         }
 
     }

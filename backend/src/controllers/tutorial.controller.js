@@ -71,6 +71,13 @@ exports.updateTutorial = async (req, res) => {
             return res.status(404).json({ message: "Tutorial not found" });
         }
 
+        // Check if a tutorial with the same title already exists in the database
+        const existingTutorial = await TutorialM.findOne({ title: req.body.title });
+        if (existingTutorial) {
+            // If a tutorial with the same title exists, respond with a 409 status and an error message
+            return res.status(409).json({ message: "Tutorial already exists" });
+        }
+
         // Set the 'updatedAt' field to the current date and time
         updatedTutorial.updatedAt = new Date();
         
