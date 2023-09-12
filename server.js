@@ -8,11 +8,11 @@ app.use((express.json({ limit: "30mb", extended: true})))
 app.use((express.urlencoded({ limit: "30mb", extended: true})))
 app.use((cors()));
 
-const tutRouter = require('./backend/routes/tutorials.route');
+const tutRouter = require('./backend/src/routes/tutorials.route');
 app.use("/tutorials", tutRouter);
 
-const { port, endpoint } = require("./backend/config/config");
-const dbconn = require('./backend/utility/dbConnection');
+const { port, endpoint } = require("./backend/src/config/config");
+const dbconn = require('./backend/src/utility/dbConnection');
 
 console.log("env running =>", endpoint);
 
