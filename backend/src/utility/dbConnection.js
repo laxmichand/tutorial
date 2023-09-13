@@ -2,21 +2,23 @@ const mongoose = require("mongoose");
 const { endpoint } = require("../config/config");
 const { db_connection } = require("../config/projectconfig");
 
-const getDatabaseUrl = () => {
-  if (endpoint === "development") {
-    return `mongodb://${db_connection.development.server}/${db_connection.development.database}`;
-  } else {
-    return `mongodb+srv://laxmi:laxmi@cluster0.wwrwn.mongodb.net/?retryWrites=true&w=majority`;
-  }
-};
 class Database {
   constructor() {
-    this.url = getDatabaseUrl();
-    this._connect();
+    this.url = this.getDatabaseUrl();
+    this.connect();
   }
-  async _connect() {
+
+  getDatabaseUrl() {
+    const config = endpoint === "development"
+      ? db_connection.development
+      : db_connection.production;
+      
+    return `mongodb://${config.server}/${config.database}`;
+  }
+
+  async connect() {
     try {
-      console.log('db url',this.url);
+      console.log('Connecting to the database:', this.url);
       await mongoose.connect(this.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
