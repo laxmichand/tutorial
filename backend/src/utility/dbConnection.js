@@ -1,34 +1,29 @@
-const mongoose = require("mongoose");
+let mongoose = require("mongoose");
 const { endpoint } = require("../config/config");
-const { db_connection } = require("../config/projectconfig");
+const dbConn = require("../config/projectconfig").db_connection;
 
+if (endpoint === "development") {
+  var url = `mongodb://${dbConn.development.server}/${dbConn.development.database}`;
+} else {
+  var url = `mongodb+srv://laxmi:laxmi@cluster0.wwrwn.mongodb.net/?retryWrites=true&w=majority`;
+}
+console.log(url);
 class Database {
   constructor() {
-    this.url = this.getDatabaseUrl();
-    this.connect();
+    this._connect();
   }
-
-  getDatabaseUrl() {
-    const config = endpoint === "development"
-      ? db_connection.development
-      : db_connection.production;
-      
-    return `mongodb://${config.server}/${config.database}`;
-  }
-
-  async connect() {
-    try {
-      console.log('Connecting to the database:', this.url);
-      await mongoose.connect(this.url, {
+  _connect() {
+    mongoose
+      .connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+      })
+      .then(() => {
+        console.log("Database connection successful");
+      })
+      .catch((err) => {
+        console.error("Database connection error", err);
       });
-      console.log("Database connection successful");
-    } catch (err) {
-      console.error("Database connection error", err);
-      process.exit(1); // Exit the application on connection error
-    }
   }
 }
-
 module.exports = new Database();
