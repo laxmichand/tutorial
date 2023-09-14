@@ -12,7 +12,7 @@ const tutRouter = require('./backend/src/routes/tutorials.route');
 app.use("/tutorials", tutRouter);
 
 const { port, endpoint } = require("./backend/src/config/config");
-const dbconn = require('./backend/src/utility/dbConnection');
+require('./backend/src/utility/dbConnection');
 
 console.log("env running =>", endpoint);
 
