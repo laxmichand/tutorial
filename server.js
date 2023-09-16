@@ -6,10 +6,19 @@ const helmet = require('helmet'); // Import the helmet middleware
 
 const app = express();
 
-app.use((express.json({ limit: "30mb", extended: true})))
-app.use((express.urlencoded({ limit: "30mb", extended: true})))
+app.use((express.json({ limit: "30mb", extended: true })))
+app.use((express.urlencoded({ limit: "30mb", extended: true })))
 app.use((cors()));
-app.use(helmet()); // Use the helmet middleware to enhance security
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//         "img-src": ["'self'"],
+//       },
+//     },
+//   })
+// ); // Use the helmet middleware to enhance security
 
 const tutRouter = require('./backend/src/routes/tutorials.route');
 app.use("/tutorials", tutRouter);
