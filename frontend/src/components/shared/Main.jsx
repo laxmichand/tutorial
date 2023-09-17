@@ -6,6 +6,7 @@ import {
 import loadable from '@loadable/component';
 import Login from '../login/Login';
 import SignUp from '../signup/SignUp';
+import { ToastContainer } from 'react-toastify';
 
 const Tutorials = loadable(() => import('../dashboard/Tutorials'));
 const Header = loadable(() => import('./Header'));
@@ -27,6 +28,7 @@ function Main() {
                 <Route path='*' element={<PageNotFound />} />
             </Routes>
             <Footer />
+            <ToastContainer/>
         </div>
     )
 }

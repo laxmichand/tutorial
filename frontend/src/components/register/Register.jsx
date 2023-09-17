@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import { addNew, getTutorialsById, update } from "../../services/shared/register.service";
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Register = (prop) => {
     const { id } = useParams();
     const { handleSubmit, register, reset, formState: { errors } } = useForm({ title: '', description: '', published: Boolean });
@@ -12,19 +15,21 @@ const Register = (prop) => {
         if (!id) {
             addNew(data)
                 .then((res) => {
-                    console.log("dqd",res);
+                    toast.success("successfuly added tutorial");
                     navigate('/tutorials');
-                }).catch(err=>{
-                  alert(err.response.data.message)
+                }).catch(err => {
+                    toast.error("Error while adding tutorial");
+                    alert(err.response.data.message)
                 })
 
         } else {
             update(data, id)
                 .then(() => {
+                    toast.success("successfuly updated tutorial");
                     navigate('/tutorials');
-                }).catch(err=>{
-                    alert(err.response.data.message)
-                  })
+                }).catch(err => {
+                    toast.error("Error while updating", err.response.data.message);
+                })
         }
 
     }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getCourses, deleteTutorialsById } from "../../services/shared/register.service";
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Tutorials() {
   const navigate = useNavigate();
@@ -11,16 +12,17 @@ function Tutorials() {
     getCourses().then((res) => {
       setData(res);
     }).catch(err=>{
-      alert(err.response.data.message)
+      toast.error('Error while fetching tutorial',err.response.data.message);
     })
   }, []);
 
   const handleDelete = (id) => {
     deleteTutorialsById(id).then((res) => {
       getCourses().then((res) => {
+        toast.success('Successfully deleted tutorial', id);
         setData(res);
       }).catch(err=>{
-        alert(err.response.data.message)
+        toast.error('Error while delete tutorial',err.response.data.message);
       })
     })
   };
